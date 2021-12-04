@@ -21,6 +21,7 @@ RUN mkdir /install
 ADD ./src/install.sh /install/
 ADD ./src/startup.sh /install/
 ADD ./src/execute.sh /install/
+ADD ./src/sudoers.new /etc
 RUN chmod a+x /install/install.sh
 RUN chmod a+x /install/startup.sh
 RUN chmod a+x /install/execute.sh

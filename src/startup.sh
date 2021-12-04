@@ -45,7 +45,15 @@ if [[ ! -f /install/haveuser ]]
 then
     echo adding user $USER
     touch /install/haveuser
+    mv /etc/sudoers.new /etc/sudoers
+    chown root /etc/sudoers
+    chgrp root /etc/sudoers
+    chmod o-rwx /etc/sudoers
+    chmod g-wx /etc/sudoers
+    chmod u-wx /etc/sudoers
+
     adduser --disabled-password --gecos NA --uid $USERID $USER
+    usermod -aG sudo $USER
 else
     echo user $USER already added
 fi
