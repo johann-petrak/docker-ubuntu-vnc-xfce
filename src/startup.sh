@@ -19,6 +19,12 @@ then
   exit 1
 fi
 
+if [[ x"$USERID" == x ]]
+then
+  echo Environment variable USERID not set
+  exit 1
+fi
+
 if [[ ! -d "$HOME" ]]
 then
   echo $HOME not a mounted directory
@@ -39,7 +45,7 @@ if [[ ! -f /install/haveuser ]]
 then
     echo adding user $USER
     touch /install/haveuser
-    adduser --disabled-password --gecos NA $USER
+    adduser --disabled-password --gecos NA --uid $USERID $USER
 else
     echo user $USER already added
 fi
