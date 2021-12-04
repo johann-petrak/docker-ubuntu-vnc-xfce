@@ -1,4 +1,4 @@
-# vnc-ubuntu
+# docker-ubuntu-vnc-xfce 
 
 Create docker container for running xfce in ubuntu on a headless device.
 
