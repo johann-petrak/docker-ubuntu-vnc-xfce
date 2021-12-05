@@ -1,8 +1,17 @@
 # docker-ubuntu-vnc-xfce 
 
-Create docker container for running xfce in ubuntu on a headless device.
+Create docker container for running xfce in ubuntu on a headless device. 
 
-Adapted from https://github.com/ConSol/docker-headless-vnc-container
+Unlike other images, the approach implemented here does not pre-configure either VNC or the xfce4 session inside the container
+but expects the container to use the user's home directory on the headless machine:
+
+* `$HOME/.vnc` is assumed to exist and to contain a file `passwd` for the password to use for the VNC session and a file `xstartup.sh` that 
+  contains commands for how to start up the xfce4 session.
+  * there is an example [xstartup.sh](examples/xstartup.sh)  file
+* `$HOME/.config/xfce4` is assumed to contain your favourite initial screen setup. If that directory does not exist when the VNC server is
+  started for the first time, the XFCE4 default is created.
+  * my own preferred initial setup is available as [a ZIP file](examples/xfce4-config.zip)
+
 
 License: Apache 2.0 
 
@@ -26,3 +35,11 @@ License: Apache 2.0
 Alternately, simply create your own image by using a modified Dockerfile and adapting the build command from docker-biold.sh to use the correct Dockerfile and tag.
 
 See https://hub.docker.com/repository/docker/johannpetrak/ubuntu-vnc-xfce
+
+NOTES:
+* If the screen seems to be locked up, kill the process that is running `light-locker` using `-9`
+* To prevent lightlocker to run, start `usr/bin/light-locker-settings` and disable
+
+~~~~
+
+Some of the code for this was adapted from https://github.com/ConSol/docker-headless-vnc-container
